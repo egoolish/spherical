@@ -1,0 +1,129 @@
+\documentclass[12pt, leqno]{article}
+%\usepackage{fullpage}
+\usepackage{epic}
+\usepackage{eepic}
+\usepackage{paralist}
+\usepackage{graphicx}
+\usepackage{algorithm,algorithmic}
+\usepackage{tikz}
+\usepackage{xcolor,colortbl}
+\usepackage{wrapfig}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{amssymb}
+
+\newcommand{\R}{\mathbb{R}}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is FULLPAGE.STY by H.Partl, Version 2 as of 15 Dec 1988.
+% Document Style Option to fill the paper just like Plain TeX.
+
+\typeout{Style Option FULLPAGE Version 2 as of 15 Dec 1988}
+
+\topmargin 0pt
+\advance \topmargin by -\headheight
+\advance \topmargin by -\headsep
+
+\textheight 8.9in
+
+\oddsidemargin 0pt
+\evensidemargin \oddsidemargin
+\marginparwidth 0.5in
+
+\textwidth 6.5in
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{empty}
+\setlength{\oddsidemargin}{0in}
+\setlength{\topmargin}{-0.8in}
+\setlength{\textwidth}{6.8in}
+\setlength{\textheight}{9.5in}
+
+
+\def\ind{\hspace*{0.3in}}
+\def\gap{0.1in}
+\def\bigap{0.25in}
+\newcommand{\Xomit}[1]{}
+
+
+\begin{document}
+For \textit{degree} $l \geq 0$ and \textit{order} $-l \leq m \leq l$, we have \textit{spherical harmonics}
+\[
+Y^m_l(\lambda, \theta) := 
+\begin{cases}
+\sqrt{2}a^m_l P^m_l(cos \theta)cos(m\lambda) & m > 0\\
+a^0_l P_l(cos \theta) & m = 0\\
+\sqrt{2}a^{|m|}_l P^{|m|}_l(cos \theta)sin(m\lambda) & m < 0\\
+\end{cases}
+\]
+\begin{description}
+\item[$\bullet$] where $P^k_l$, for $0 \leq k \leq l$ is the associated Legendre function
+
+\item[$\bullet$] where $a^k_l$ is the normalization factor:
+\[
+a^k_l := \sqrt{\frac{(2l+1)(l - k)!}{4\pi(l+k)!}}
+\]
+\end{description}
+
+Then for $f \in L^2(S^2)$, we have
+\[
+f(\lambda, \theta) = \sum_{l = 0}^\infty \sum_{m = -l}^l c^m_l Y^m_l(\lambda, \theta)
+\]
+where our coefficients $c^m_l$ can be defined as:
+\[
+c^m_l = \int_{S^2}f Y^m_l dS = \int_0^{2\pi} \int_0^\pi f(\lambda, \theta)Y^m_l(\lambda, \theta)d\theta d\lambda
+\]
+In fact, this holds for any $n \geq 3$, where for a function $f \in L^2(S^n)$:
+\[
+f(\theta, \phi) = \sum_{l = 0}^\infty \sum_{m = -l}^l f_{l, m} Y_{l, m}(\theta, \phi)
+\]
+where our coefficients $f_{l, m}$ are calculated by:
+\[
+f_{l, m} = \int_0^{2\pi} \int_0^{\pi}f(\theta, \phi)Y^*_{l, m}(\theta, \phi)sin(\phi)d\theta d\phi
+\]
+[\textit{Note:}]
+\[
+Y^*_{l, m}(\theta, \phi) = a^m_l P^m_l(cos \phi)e^{-m\phi}
+\]
+In {\textbf{Zonal Spherical Harmonics}}, we say that:
+\[
+Z^{(l)}(\theta, \phi) := P_l(cos \theta)
+\]
+where again we have $P^l$ a Legendre polynomial of degree $l$. We can then say we have general zonal harmonic with fixed axis $x$ and variable $y$ given by $Z^{(l)}_x(y)$.
+
+Thus for any $Y \in H_l$, a finite dimensional Hilbert space of spherical harmonics degree $l$:
+\[
+Y(x) = \int_{S^{n-1}} Z^{(l)}_x(y)Y(y)d\Omega(y)
+\]
+\newpage
+Finally, we provide an alternate view of our spherical harmonics: again we define our harmonics as:
+\[
+Y^m_l(\theta, \varphi) = N^m_l P^m_l(cos \theta)e^{im\varphi}
+\]
+for normalization factor
+\[
+N^m_l := \sqrt{\frac{(2l + 1)}{4\pi}\frac{(l - |m|)!}{(l + |m|)!}}
+\]
+and associated Legendre polynomial $P^m_l$.\\
+
+Now define $L^2(S^n)$ as the space of (real) square-integrable functions on the sphere $S^n$. Then, defining
+\[
+\langle f, g \rangle = \int_{S^n}fg\Omega_n
+\]
+means that $L^2(S^n)$ is indeed a Hilbert space. In fact, we have 
+\[
+L^2(S^n) = \bigoplus_{k=0}^\infty \mathcal{H}_k(S^n)
+\]
+and so for every $f \in L^2(S^n)$, we know that
+\[
+f = \sum_{l = 0}^{\infty} \sum_{m = -l}^l c_{l, m} Y^m_l
+\]
+where we can find $c_{l, m}$ by:
+\[
+c_{l, m} = \langle f, Y^m_l \rangle
+\]
+\end{document}
